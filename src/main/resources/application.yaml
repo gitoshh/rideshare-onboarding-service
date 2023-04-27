@@ -1,0 +1,24 @@
+server:
+  port: 9001
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3309/rideshare
+    username: root
+    password: t00R
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+aws:
+  access_key: <your access key>
+  secret_key: <your secret key>
+  region: us-east-1
+  s3_bucket: <your bucket name>
+  s3_url: https://s3.amazonaws.co
+
+jwt:
+  signing:
+    key:
