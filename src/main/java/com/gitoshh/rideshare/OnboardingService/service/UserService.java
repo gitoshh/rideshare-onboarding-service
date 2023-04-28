@@ -66,6 +66,11 @@ public class UserService {
                 .role(userSignupRequest.isRider() ? Role.DRIVER : Role.RIDER)
                 .build();
 
+        // For users who sign up as riders, we will set onBoarded to true
+        if (userSignupRequest.isRider()) {
+            user.setOnBoarded(true);
+        }
+
 //        MultipartFile file = userSignupRequest.file();
 //
 //        // Check if the file is empty
@@ -141,10 +146,22 @@ public class UserService {
                 .lastName(user.getLastName())
                 .email(user.getEmail())
                 .phone(user.getPhone())
+                .isOnBoarded(user.isOnBoarded())
                 .avatar(user.getAvatar())
                 .verificationCode(user.getVerificationCode())
 
                 .build();
 
+    }
+
+    /**
+     * Complete onboarding
+     * @param id - user id
+     * @return - user response
+     */
+    public UserResponseEntity completeOnBoarding(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
+        user.setOnBoarded(true);
+        return generateUserResponse(user);
     }
 }

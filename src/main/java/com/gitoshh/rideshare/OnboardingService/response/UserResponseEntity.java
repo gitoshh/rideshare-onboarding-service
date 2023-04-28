@@ -12,6 +12,7 @@ public record UserResponseEntity(
         String phone,
         Role role,
         String avatar,
-        String verificationCode
+        String verificationCode,
+        boolean isOnBoarded
 ) {
 }

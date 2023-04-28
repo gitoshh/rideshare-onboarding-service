@@ -41,6 +41,9 @@ public class User implements UserDetails {
 
     private String avatar;
 
+    @Column(columnDefinition = "boolean default false")
+    private boolean onBoarded;
+
     @Column(name = "is_verified", columnDefinition = "boolean default false")
     private boolean isVerified;
 

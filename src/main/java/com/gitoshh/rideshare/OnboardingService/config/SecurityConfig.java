@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -19,24 +20,29 @@ public class SecurityConfig {
     private final AuthenticationProvider customAuthenticationProvider;
 
     private final JWTAuthFilter jwtAuthFilter;
+    private final CorsFilter corsFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
+        return http
+                .cors()
+                .and()
+                .csrf().disable()
                 .httpBasic()
                 .disable()
                 .formLogin()
                 .disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
+                .authorizeHttpRequests(
+                        authorize -> authorize
+                                .requestMatchers("/api/v1/auth/**").permitAll()
+                                .anyRequest().authenticated()
+                )
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(customAuthenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(corsFilter, JWTAuthFilter.class)
                 .build();
     }
 }

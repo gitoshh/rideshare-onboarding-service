@@ -21,6 +21,9 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @RequiredArgsConstructor
@@ -33,6 +36,9 @@ public class AppConfig {
     private String SECRET_KEY;
     @Value("${aws.region}")
     private String REGION;
+
+    @Value("${server.allowed_origins}")
+    private String allowedOrigins;
 
     public AWSCredentials credentials() {
         return new BasicAWSCredentials(
@@ -102,6 +108,26 @@ public class AppConfig {
     @Bean
     public AuthenticationManager authenticationManagerBean(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration configuration = new CorsConfiguration();
+        String[] allowedOriginsArrays = allowedOrigins.split(",");
+
+        configuration.setAllowCredentials(true);
+        for (String allowedOrigin: allowedOriginsArrays) {
+            configuration.addAllowedOrigin(allowedOrigin);
+        }
+        configuration.addAllowedHeader("*");
+
+        String[] allowedMethods = {"OPTIONS", "HEAD", "GET", "PUT", "POST", "DELETE", "PATCH"};
+        for (String allowedMethod: allowedMethods) {
+            configuration.addAllowedMethod(allowedMethod);
+        }
+        source.registerCorsConfiguration("/**", configuration);
+        return new CorsFilter(source);
     }
 
 }
