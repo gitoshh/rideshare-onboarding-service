@@ -10,6 +10,7 @@ public record UserLoginResponse(
         String token,
         String firstName,
         Long userId,
-        Role role
+        Role role,
+        boolean isOnBoarded
 ) {
 }

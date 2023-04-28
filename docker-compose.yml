@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      MYSQL_USER: rideshare
+      MYSQL_ROOT_PASSWORD: t00R
+      MYSQL_DATABASE: rideshare
+      MYSQL_PASSWORD: r3sU
+    ports:
+      - "3309:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+
+
+volumes:
+    db_data:
