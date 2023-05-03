@@ -12,9 +12,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
 import org.springframework.test.web.servlet.MockMvc;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -28,7 +31,7 @@ class AuthenticationControllerTest {
     @Autowired
     private UserRepository userRepository;
 
-  @AfterEach
+    @AfterEach
     void tearDown() {
         userRepository.deleteAll();
     }
@@ -48,7 +51,8 @@ class AuthenticationControllerTest {
                                   "isRider": true,
                                   "isDriver": false
                                  }
-                                """).accept(APPLICATION_JSON))
+                                """)
+                        .accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
@@ -73,13 +77,13 @@ class AuthenticationControllerTest {
     @Test
     void itReturnUnAuthorisedForUnavailableUsers() throws Exception {
         mvc.perform(post("/api/v1/auth/login")
-                .contentType(APPLICATION_JSON)
-                .content("""
-                         {
-                         "email": "test@mail.com",
-                          "password": "testPassword"
-                         }
-                        """).accept(APPLICATION_JSON))
+                        .contentType(APPLICATION_JSON)
+                        .content("""
+                                 {
+                                 "email": "test@mail.com",
+                                  "password": "testPassword"
+                                 }
+                                """).accept(APPLICATION_JSON))
                 .andExpect(status().is(401));
     }
 
@@ -99,11 +103,11 @@ class AuthenticationControllerTest {
         mvc.perform(post("/api/v1/auth/login")
                         .contentType(APPLICATION_JSON)
                         .content("""
-                         {
-                         "email": "test@gmail.com",
-                          "password": "testPassword"
-                         }
-                        """).accept(APPLICATION_JSON))
+                                 {
+                                 "email": "test@gmail.com",
+                                  "password": "testPassword"
+                                 }
+                                """).accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 }

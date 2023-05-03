@@ -70,7 +70,7 @@ public class UserService {
 
         // For users who sign up as riders, we will set onBoarded to true
         if (userSignupRequest.isRider()) {
-            log.info(userSignupRequest.isRider());
+            log.info(true);
             user.setOnBoarded(true);
         }
 

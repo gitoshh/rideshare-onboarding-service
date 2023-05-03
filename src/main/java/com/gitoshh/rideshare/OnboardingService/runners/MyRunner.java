@@ -38,7 +38,7 @@ public class MyRunner implements CommandLineRunner {
                 .email("jane.doe@gmail.com")
                 .password(passwordEncoder.encode("password"))
                 .phone("0712345679")
-                .role(Role.DRIVER)
+                .role(Role.RIDER)
                 .build();
         userRepository.save(user1);
 
@@ -58,7 +58,7 @@ public class MyRunner implements CommandLineRunner {
                 .email("john2.doe@gmail.com")
                 .password(passwordEncoder.encode("password"))
                 .phone("0712345671")
-                .role(Role.DRIVER)
+                .role(Role.ADMIN)
                 .build();
         userRepository.save(user3);
 
