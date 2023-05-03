@@ -8,6 +8,7 @@ import com.gitoshh.rideshare.OnboardingService.repo.UserRepository;
 import com.gitoshh.rideshare.OnboardingService.request.UserSignupRequest;
 import com.gitoshh.rideshare.OnboardingService.response.UserResponseEntity;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +22,7 @@ import static org.apache.http.entity.ContentType.*;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class UserService {
     private final UserRepository userRepository;
     private final FileStorageInterface fileStore;
@@ -68,6 +70,7 @@ public class UserService {
 
         // For users who sign up as riders, we will set onBoarded to true
         if (userSignupRequest.isRider()) {
+            log.info(userSignupRequest.isRider());
             user.setOnBoarded(true);
         }
 

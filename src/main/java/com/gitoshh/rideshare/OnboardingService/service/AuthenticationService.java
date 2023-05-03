@@ -21,15 +21,15 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final JWTService jwtService;
 
-    public UserLoginResponse login(UserLoginRequest userSignupRequest) {
+    public UserLoginResponse login(UserLoginRequest userLoginRequest) {
         // Authenticate user with email and password
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(userSignupRequest.email(), userSignupRequest.password())
+                new UsernamePasswordAuthenticationToken(userLoginRequest.email(), userLoginRequest.password())
         );
         // Fetch user from database
-        User user = userRepository.findByEmail(userSignupRequest.email()).orElseThrow(() -> new NotFoundException("User not found"));
+        User user = userRepository.findByEmail(userLoginRequest.email()).orElseThrow(() -> new NotFoundException("User not found"));
         // Generate token
-        String jwtToken = jwtService.generateToken(user);
+        String jwtToken = "Bearer " + jwtService.generateToken(user);
 
         // Return response
         return UserLoginResponse.builder()

@@ -1,8 +1,10 @@
 package com.gitoshh.rideshare.OnboardingService.request;
 
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 import org.springframework.web.multipart.MultipartFile;
 
+@Builder
 public record UserSignupRequest(
         @Email
         String email,

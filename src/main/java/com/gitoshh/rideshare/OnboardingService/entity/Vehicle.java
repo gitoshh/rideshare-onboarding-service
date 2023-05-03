@@ -27,7 +27,7 @@ public class Vehicle {
 
     private String model;
 
-    private int year;
+    private int yearOfManufacture;
 
     private String color;
 

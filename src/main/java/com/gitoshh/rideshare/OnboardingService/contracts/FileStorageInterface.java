@@ -5,6 +5,4 @@ import java.util.Map;
 
 public interface FileStorageInterface {
     String uploadFile(String fileName, InputStream inputStream, Map<String, String> objectMetadata);
-
-    byte[] getFile(String fileName);
 }

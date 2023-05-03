@@ -34,9 +34,4 @@ public class AWSFileStorageService implements FileStorageInterface {
             throw new IllegalStateException("Failed to upload the file", e);
         }
     }
-
-    @Override
-    public byte[] getFile(String fileName) {
-        return new byte[0];
-    }
 }

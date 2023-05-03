@@ -41,7 +41,7 @@ public record VehicleService(VehicleRepository vehicleRepository, UserService us
         Vehicle newVehicle = Vehicle.builder()
                 .make(vehicle.make())
                 .model(vehicle.model())
-                .year(vehicle.year())
+                .yearOfManufacture(vehicle.year())
                 .color(vehicle.color())
                 .licensePlate(vehicle.licensePlate())
                 .insurancePolicyNumber(vehicle.insurancePolicyNumber())

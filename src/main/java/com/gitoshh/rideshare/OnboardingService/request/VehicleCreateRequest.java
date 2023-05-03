@@ -2,7 +2,9 @@ package com.gitoshh.rideshare.OnboardingService.request;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
+@Builder
 public record VehicleCreateRequest(
         @NotEmpty(message = "Make cannot be empty")
         String make,

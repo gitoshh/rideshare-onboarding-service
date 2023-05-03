@@ -11,6 +11,7 @@ import com.gitoshh.rideshare.OnboardingService.exception.NotFoundException;
 import com.gitoshh.rideshare.OnboardingService.repo.UserRepository;
 import com.gitoshh.rideshare.OnboardingService.service.external.AWSFileStorageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,8 +27,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration
-@RequiredArgsConstructor
-public class AppConfig {
+public class OnBoardingAppConfig {
+
     private final UserRepository userRepository;
 
     @Value("${aws.access_key}")
@@ -40,6 +41,13 @@ public class AppConfig {
     @Value("${server.allowed_origins}")
     private String allowedOrigins;
 
+    @Autowired
+    public OnBoardingAppConfig(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+
+    @Bean
     public AWSCredentials credentials() {
         return new BasicAWSCredentials(
                 ACCESS_KEY,
