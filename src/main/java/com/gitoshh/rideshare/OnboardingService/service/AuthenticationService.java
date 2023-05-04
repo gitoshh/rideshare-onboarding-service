@@ -36,6 +36,7 @@ public class AuthenticationService {
                 .userId(user.getId())
                 .firstName(user.getFirstName())
                 .role(user.getRole())
+                .isOnBoarded(user.isOnBoarded())
                 .token(jwtToken)
                 .build();
     }

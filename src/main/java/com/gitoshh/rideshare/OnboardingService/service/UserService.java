@@ -65,7 +65,7 @@ public class UserService {
                 .phone(userSignupRequest.phone())
                 .firstName(userSignupRequest.firstName())
                 .lastName(userSignupRequest.lastName())
-                .role(userSignupRequest.isRider() ? Role.DRIVER : Role.RIDER)
+                .role(userSignupRequest.isRider() ? Role.RIDER : Role.DRIVER)
                 .build();
 
         // For users who sign up as riders, we will set onBoarded to true

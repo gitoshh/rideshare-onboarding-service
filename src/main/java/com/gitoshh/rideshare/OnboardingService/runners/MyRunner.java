@@ -33,6 +33,7 @@ public class MyRunner implements CommandLineRunner {
                 .password(passwordEncoder.encode("password"))
                 .phone("0712345678")
                 .role(Role.DRIVER)
+                .onBoarded(true)
                 .build();
         userRepository.save(user);
 
@@ -42,6 +43,7 @@ public class MyRunner implements CommandLineRunner {
                 .email("jane.doe@gmail.com")
                 .password(passwordEncoder.encode("password"))
                 .phone("0712345679")
+                .onBoarded(true)
                 .role(Role.RIDER)
                 .build();
         userRepository.save(user1);
@@ -52,6 +54,7 @@ public class MyRunner implements CommandLineRunner {
                 .email("john1.doe@gmail.com")
                 .password(passwordEncoder.encode("password"))
                 .phone("0712345670")
+                .onBoarded(false)
                 .role(Role.DRIVER)
                 .build();
         userRepository.save(user2);
@@ -62,6 +65,7 @@ public class MyRunner implements CommandLineRunner {
                 .email("john2.doe@gmail.com")
                 .password(passwordEncoder.encode("password"))
                 .phone("0712345671")
+                .onBoarded(true)
                 .role(Role.ADMIN)
                 .build();
         userRepository.save(user3);
@@ -72,6 +76,7 @@ public class MyRunner implements CommandLineRunner {
                 .email("jane2.doe@gmail.com")
                 .password(passwordEncoder.encode("password"))
                 .phone("0712345672")
+                .onBoarded(true)
                 .role(Role.DRIVER)
                 .build();
         userRepository.save(user4);
