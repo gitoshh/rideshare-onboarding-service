@@ -2,7 +2,9 @@ package com.gitoshh.rideshare.OnboardingService.runners;
 
 import com.gitoshh.rideshare.OnboardingService.entity.Role;
 import com.gitoshh.rideshare.OnboardingService.entity.User;
+import com.gitoshh.rideshare.OnboardingService.entity.Vehicle;
 import com.gitoshh.rideshare.OnboardingService.repo.UserRepository;
+import com.gitoshh.rideshare.OnboardingService.repo.VehicleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,6 +19,8 @@ public class MyRunner implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
+
+    private final VehicleRepository vehicleRepository;
 
 
     @Override
@@ -71,5 +75,35 @@ public class MyRunner implements CommandLineRunner {
                 .role(Role.DRIVER)
                 .build();
         userRepository.save(user4);
+
+        vehicleRepository.save(Vehicle.builder()
+                .make("Toyota")
+                .model("Corolla")
+                .yearOfManufacture(2010)
+                .color("Black")
+                .licensePlate("KCA 123A")
+                .userId(user.getId())
+                .insurancePolicyNumber("223456789")
+                .build());
+
+        vehicleRepository.save(Vehicle.builder()
+                .make("Mazda")
+                .model("Demio")
+                .yearOfManufacture(2010)
+                .color("White")
+                .licensePlate("KCC 145B")
+                .insurancePolicyNumber("123456709")
+                .userId(user2.getId())
+                .build());
+
+        vehicleRepository.save(Vehicle.builder()
+                .make("Mazda")
+                .model("Axela")
+                .yearOfManufacture(2010)
+                .color("White")
+                .licensePlate("KDA 145B")
+                .insurancePolicyNumber("123456789")
+                .userId(user4.getId())
+                .build());
     }
 }
